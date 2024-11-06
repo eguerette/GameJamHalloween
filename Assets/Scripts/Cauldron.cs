@@ -9,6 +9,7 @@ public class Cauldron : MonoBehaviour
     private string totalObjectText; 
     public ParticleSystem particles;
     public TMP_Text points;
+    public AudioSource audioSource;
 
     private void Start()
     {
@@ -19,17 +20,21 @@ public class Cauldron : MonoBehaviour
 
     private void Update()
     {
-        if (totalObject == 10) {
-
+        if (totalObject == 10) 
+        {
             Application.Quit();
         }
     }
 
     private void OnCollisionEnter(Collision other)
     {
+        if (audioSource != null)
+        {
+            audioSource.Play();
+        }
         
         Destroy(other.gameObject);
-        totalObject ++;
+        totalObject++;
         particles.Play();
         totalObjectText = totalObject.ToString();
         points.text = "Points = " + totalObjectText; 
